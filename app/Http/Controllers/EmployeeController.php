@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         $employees = Employee::latest()->paginate(5);
@@ -21,6 +19,22 @@ class EmployeeController extends Controller
     {
         $employees = Employee::all();
         return view('employee.create', compact('employees'));
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nama_lengkap'   => 'required|string|max:255',
+            'email'          => 'required|email|max:255',
+            'nomor_telepon'  => 'required|string|max:20',
+            'tanggal_lahir'  => 'required|date',
+            'alamat'         => 'required|string|max:255',
+            'tanggal_masuk'  => 'required|date',
+            'status'         => 'required|string|max:50',
+        ]);
+
+        Employee::create($request->all());
+        return redirect()->route('employees.index');
     }
 
     public function show(string $id)
@@ -71,22 +85,6 @@ class EmployeeController extends Controller
     {
         $employee = Employee::findOrFail($id);
         $employee->delete();
-        return redirect()->route('employees.index');
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'nama_lengkap'   => 'required|string|max:255',
-            'email'          => 'required|email|max:255',
-            'nomor_telepon'  => 'required|string|max:20',
-            'tanggal_lahir'  => 'required|date',
-            'alamat'         => 'required|string|max:255',
-            'tanggal_masuk'  => 'required|date',
-            'status'         => 'required|string|max:50',
-        ]);
-
-        Employee::create($request->all());
         return redirect()->route('employees.index');
     }
 }
