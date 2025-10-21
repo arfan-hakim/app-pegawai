@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\DepartementController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -8,3 +10,5 @@ Route::get('/', function () {
 });
 
 Route::resource('employees', EmployeeController::class);
+Route::resource('departements', DepartementController::class);
+Route::resource('attendances', AttendanceController::class);

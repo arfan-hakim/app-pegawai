@@ -17,10 +17,10 @@
             <nav>
                 <ul class="flex space-x-6">
                     <li><a href="{{ url('/employees') }}" class="hover:underline">Employee</a></li>
-                    <li><a href="{{ url('/department') }}" class="hover:underline">Department</a></li>
-                    <li><a href="{{ url('/attendance') }}" class="hover:underline">Attendance</a></li>
-                    <li><a href="{{ url('/report') }}" class="hover:underline">Report</a></li>
-                    <li><a href="{{ url('/settings') }}" class="hover:underline">Settings</a></li>
+                    <li><a href="{{ url('/departements') }}" class="hover:underline">Department</a></li>
+                    <li><a href="{{ url('/attendances') }}" class="hover:underline">Attendance</a></li>
+                    <li><a href="{{ url('/positions') }}" class="hover:underline">Position</a></li>
+                    <li><a href="{{ url('/salaries') }}" class="hover:underline">Salary</a></li>
                 </ul>
             </nav>
         </div>
