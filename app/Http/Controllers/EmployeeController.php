@@ -36,7 +36,7 @@ class EmployeeController extends Controller
             'tanggal_lahir' => 'required|date',
             'alamat' => 'required|string',
             'tanggal_masuk' => 'required|date',
-            'departement_id' => 'required|exists:departemen,id',
+            'departement_id' => 'required|exists:departements,id',
             'jabatan_id' => 'required|exists:positions,id',
             'status' => 'required|string',
         ]);
