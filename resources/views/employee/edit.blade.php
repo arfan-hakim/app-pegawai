@@ -1,68 +1,103 @@
 @extends('layouts.master')
 
-@section('title', 'Daftar Pegawai')
-@section('page-title', 'Daftar Pegawai')
+@section('title', 'Edit Pegawai')
+@section('page-title', 'Edit Pegawai')
 
 @section('content')
-<div class="container mx-auto max-w-2xl bg-white shadow-md rounded-lg p-6">
-    <h2 class="text-2xl font-bold mb-6 text-gray-700">Edit Data Pegawai</h2>
+<div class="container mt-4">
+    <h3>Edit Data Karyawan</h3>
+    <hr>
 
-    <form action="{{ route('employees.update', $employee->id) }}" method="POST" class="space-y-4">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <strong>Terjadi kesalahan!</strong>
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
+    <form action="{{ route('employee.update', $employee->id) }}" method="POST">
         @csrf
         @method('PUT')
-        <div>
-            <label class="block text-gray-700">Nama Lengkap</label>
-            <input type="text" name="nama_lengkap"
-                value="{{ old('nama_lengkap', $employee->nama_lengkap) }}"
-                class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300">
+
+        <!-- Nama Lengkap -->
+        <div class="mb-3">
+            <label for="nama_lengkap" class="form-label">Nama Lengkap</label>
+            <input type="text" name="nama_lengkap" class="form-control" value="{{ old('nama_lengkap', $employee->nama_lengkap) }}" required>
         </div>
-        <div>
-            <label class="block text-gray-700">Email</label>
-            <input type="email" name="email"
-                value="{{ old('email', $employee->email) }}"
-                class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300">
+
+        <!-- Email -->
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" name="email" class="form-control" value="{{ old('email', $employee->email) }}" required>
         </div>
-        <div>
-            <label class="block text-gray-700">Nomor Telepon</label>
-            <input type="text" name="nomor_telepon"
-                value="{{ old('nomor_telepon', $employee->nomor_telepon) }}"
-                class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300">
+
+        <!-- Nomor Telepon -->
+        <div class="mb-3">
+            <label for="nomor_telepon" class="form-label">Nomor Telepon</label>
+            <input type="text" name="nomor_telepon" class="form-control" value="{{ old('nomor_telepon', $employee->nomor_telepon) }}" required>
         </div>
-        <div>
-            <label class="block text-gray-700">Tanggal Lahir</label>
-            <input type="date" name="tanggal_lahir"
-                value="{{ old('tanggal_lahir', $employee->tanggal_lahir) }}"
-                class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300">
+
+        <!-- Tanggal Lahir -->
+        <div class="mb-3">
+            <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
+            <input type="date" name="tanggal_lahir" class="form-control" value="{{ old('tanggal_lahir', $employee->tanggal_lahir) }}" required>
         </div>
-        <div>
-            <label class="block text-gray-700">Alamat</label>
-            <input type="text" name="alamat"
-                value="{{ old('alamat', $employee->alamat) }}"
-                class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300">
+
+        <!-- Alamat -->
+        <div class="mb-3">
+            <label for="alamat" class="form-label">Alamat</label>
+            <textarea name="alamat" class="form-control" rows="3" required>{{ old('alamat', $employee->alamat) }}</textarea>
         </div>
-        <div>
-            <label class="block text-gray-700">Tanggal Masuk</label>
-            <input type="date" name="tanggal_masuk"
-                value="{{ old('tanggal_masuk', $employee->tanggal_masuk) }}"
-                class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300">
+
+        <!-- Tanggal Masuk -->
+        <div class="mb-3">
+            <label for="tanggal_masuk" class="form-label">Tanggal Masuk</label>
+            <input type="date" name="tanggal_masuk" class="form-control" value="{{ old('tanggal_masuk', $employee->tanggal_masuk) }}" required>
         </div>
-        <div>
-            <label class="block text-gray-700">Status</label>
-            <select name="status"
-                class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300">
-                <option value="aktif" {{ old('status', $employee->status) == 'aktif' ? 'selected' : '' }}>Aktif</option>
-                <option value="tidak aktif" {{ old('status', $employee->status) == 'tidak aktif' ? 'selected' : '' }}>Tidak Aktif</option>
+
+        <!-- Departemen -->
+        <div class="mb-3">
+            <label for="departemen_id" class="form-label">Departemen</label>
+            <select name="departemen_id" class="form-select" required>
+                <option value="">-- Pilih Departemen --</option>
+                @foreach ($departemen as $d)
+                <option value="{{ $d->id }}" {{ old('departemen_id', $employee->departemen_id) == $d->id ? 'selected' : '' }}>
+                    {{ $d->nama_departemen }}
+                </option>
+                @endforeach
             </select>
         </div>
-        <div class="flex justify-between">
-            <a href="{{ route('employees.index') }}"
-                class="bg-gray-500 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-600">
-                Batal
-            </a>
-            <button type="submit"
-                class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700">
-                Update
-            </button>
+
+        <!-- Jabatan -->
+        <div class="mb-3">
+            <label for="jabatan_id" class="form-label">Jabatan</label>
+            <select name="jabatan_id" class="form-select" required>
+                <option value="">-- Pilih Jabatan --</option>
+                @foreach ($jabatan as $j)
+                <option value="{{ $j->id }}" {{ old('jabatan_id', $employee->jabatan_id) == $j->id ? 'selected' : '' }}>
+                    {{ $j->nama_jabatan }}
+                </option>
+                @endforeach
+            </select>
+        </div>
+
+        <!-- Status -->
+        <div class="mb-3">
+            <label for="status" class="form-label">Status</label>
+            <select name="status" class="form-select" required>
+                <option value="">-- Pilih Status --</option>
+                <option value="Aktif" {{ old('status', $employee->status) == 'Aktif' ? 'selected' : '' }}>Aktif</option>
+                <option value="Tidak Aktif" {{ old('status', $employee->status) == 'Tidak Aktif' ? 'selected' : '' }}>Tidak Aktif</option>
+            </select>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <a href="{{ route('employee.index') }}" class="btn btn-secondary">Kembali</a>
+            <button type="submit" class="btn btn-primary">Perbarui</button>
         </div>
     </form>
 </div>

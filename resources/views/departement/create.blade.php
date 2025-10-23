@@ -12,26 +12,8 @@
 
         <div>
             <label class="block text-gray-700">Nama Departemen</label>
-            <input type="text" name="nama_departemen"
+            <input type="text" name="nama_departement"
                 class="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-200" required>
-        </div>
-
-        <div>
-            <label class="block text-gray-700">Kode Departemen</label>
-            <input type="text" name="kode_departemen"
-                class="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-200" required>
-        </div>
-
-        <div>
-            <label class="block text-gray-700">Lokasi</label>
-            <input type="text" name="lokasi"
-                class="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-200">
-        </div>
-
-        <div>
-            <label class="block text-gray-700">Deskripsi</label>
-            <textarea name="deskripsi" rows="3"
-                class="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-200"></textarea>
         </div>
 
         <div class="flex justify-between">

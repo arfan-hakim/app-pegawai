@@ -9,13 +9,13 @@ class Departement extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description'];
+    protected $fillable = ['nama_departement'];
 
     protected $table = 'departements';
 
     // One Departement has many Employees
     public function employees()
     {
-        return $this->hasMany(Employee::class, 'departemen_id');
+        return $this->hasMany(Employee::class, 'departement_id');
     }
 }

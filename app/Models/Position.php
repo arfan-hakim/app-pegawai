@@ -9,6 +9,8 @@ class Position extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['nama_jabatan', 'gaji_pokok'];
+
     protected $table = 'positions';
 
     // One Position has many Employees

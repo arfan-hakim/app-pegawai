@@ -14,6 +14,6 @@ class Salary extends Model
     // Satu data gaji dimiliki oleh satu pegawai
     public function employee()
     {
-        return $this->belongsTo(Employee::class, 'employee_id');
+        return $this->belongsTo(employee::class, 'employee_id');
     }
 }

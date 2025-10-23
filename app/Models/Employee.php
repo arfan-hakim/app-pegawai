@@ -1,11 +1,15 @@
 <?php
-
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Employee extends Model
 {
+    use HasFactory;
+
+    protected $table = 'employees';
+
     protected $fillable = [
         'nama_lengkap',
         'email',
@@ -13,29 +17,17 @@ class Employee extends Model
         'tanggal_lahir',
         'alamat',
         'tanggal_masuk',
+        'departement_id',
+        'jabatan_id',
         'status',
     ];
-    // Pegawai milik satu departemen
+
     public function departement()
     {
-        return $this->belongsTo(Departement::class, 'departemen_id');
+        return $this->belongsTo(Departement::class, 'departement_id');
     }
-
-    // Pegawai milik satu jabatan
     public function position()
     {
         return $this->belongsTo(Position::class, 'jabatan_id');
-    }
-
-    // Pegawai punya banyak absensi
-    public function attendances()
-    {
-        return $this->hasMany(Attendance::class, 'employee_id');
-    }
-
-    // Pegawai punya banyak gaji
-    public function salaries()
-    {
-        return $this->hasMany(Salary::class, 'employee_id');
     }
 }
