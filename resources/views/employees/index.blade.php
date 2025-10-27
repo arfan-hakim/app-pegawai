@@ -36,7 +36,7 @@
                     <td class="px-6 py-3">{{ $employee->email }}</td>
                     <td class="px-6 py-3">{{ $employee->nomor_telepon }}</td>
                     <td class="px-6 py-3">
-                        {{ $employee->departement ? $employee->departement->nama_departemen : '-' }}
+                        {{ $employee->departement ? $employee->departement->nama_departement : '-' }}
                     </td>
                     <td class="px-6 py-3">
                         {{ $employee->position ? $employee->position->nama_jabatan : '-' }}
@@ -48,19 +48,29 @@
                         </span>
                     </td>
                     <td class="px-6 py-3 text-center space-x-3">
+                        <!-- Tombol Detail -->
+                        <a href="{{ route('employees.show', $employee->id) }}"
+                            class="text-green-600 hover:text-green-800 font-semibold transition">
+                            Detail
+                        </a>
+
                         <!-- Tombol Edit -->
                         <a href="{{ route('employees.edit', $employee->id) }}"
-                            class="text-blue-600 hover:text-blue-800 font-semibold transition">Edit</a>
+                            class="text-blue-600 hover:text-blue-800 font-semibold transition">
+                            Edit
+                        </a>
 
                         <!-- Tombol Hapus -->
                         <form action="{{ route('employees.destroy', $employee->id) }}" method="POST" class="inline"
                             onsubmit="return confirm('Yakin ingin menghapus data pegawai ini?')">
                             @csrf
                             @method('DELETE')
-                            <button type="submit"
-                                class="text-red-600 hover:text-red-800 font-semibold transition">Hapus</button>
+                            <button type="submit" class="text-red-600 hover:text-red-800 font-semibold transition">
+                                Hapus
+                            </button>
                         </form>
                     </td>
+
                 </tr>
                 @endforeach
             </tbody>

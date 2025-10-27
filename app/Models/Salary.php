@@ -9,11 +9,17 @@ class Salary extends Model
 {
     use HasFactory;
 
-    protected $table = 'salaries';
+    protected $fillable = [
+        'karyawan_id',
+        'bulan',
+        'gaji_pokok',
+        'tunjangan',
+        'potongan',
+        'total_gaji',
+    ];
 
-    // Satu data gaji dimiliki oleh satu pegawai
     public function employee()
     {
-        return $this->belongsTo(employee::class, 'employee_id');
+        return $this->belongsTo(Employee::class, 'karyawan_id');
     }
 }

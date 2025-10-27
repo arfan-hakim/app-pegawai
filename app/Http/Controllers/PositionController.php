@@ -13,7 +13,7 @@ class PositionController extends Controller
     public function index()
     {
         $positions = Position::latest()->paginate(5);
-        return view('position.index', compact('positions'));
+        return view('positions.index', compact('positions'));
     }
 
     /**
@@ -21,7 +21,7 @@ class PositionController extends Controller
      */
     public function create()
     {
-        return view('position.create');
+        return view('positions.create');
     }
 
 
@@ -54,7 +54,7 @@ class PositionController extends Controller
     public function show($id)
     {
         $position = Position::findOrFail($id);
-        return view('position.show', compact('position'));
+        return view('positions.show', compact('position'));
     }
 
 
@@ -67,7 +67,7 @@ class PositionController extends Controller
         $position = Position::findOrFail($id);
 
         // Kirim data ke view edit.blade.php
-        return view('position.edit', compact('position'));
+        return view('positions.edit', compact('position'));
     }
 
 

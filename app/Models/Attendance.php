@@ -11,7 +11,15 @@ class Attendance extends Model
 
     protected $table = 'attendances';
 
-    // Satu absensi dimiliki oleh satu pegawai
+    protected $fillable = [
+        'karyawan_id',
+        'tanggal',
+        'waktu_masuk',
+        'waktu_keluar',
+        'status_absensi',
+    ];
+
+    // Relasi ke model Employee
     public function employee()
     {
         return $this->belongsTo(Employee::class, 'karyawan_id');

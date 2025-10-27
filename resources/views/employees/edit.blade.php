@@ -19,7 +19,7 @@
     </div>
     @endif
 
-    <form action="{{ route('employee.update', $employee->id) }}" method="POST">
+    <form action="{{ route('employees.update', $employee->id) }}" method="POST">
         @csrf
         @method('PUT')
 
@@ -61,16 +61,17 @@
 
         <!-- Departemen -->
         <div class="mb-3">
-            <label for="departemen_id" class="form-label">Departemen</label>
-            <select name="departemen_id" class="form-select" required>
+            <label for="departement_id" class="form-label">Departemen</label>
+            <select name="departement_id" class="form-select" required>
                 <option value="">-- Pilih Departemen --</option>
-                @foreach ($departemen as $d)
-                <option value="{{ $d->id }}" {{ old('departemen_id', $employee->departemen_id) == $d->id ? 'selected' : '' }}>
-                    {{ $d->nama_departemen }}
+                @foreach ($departement as $d)
+                <option value="{{ $d->id }}" {{ old('departement_id', $employee->departement_id) == $d->id ? 'selected' : '' }}>
+                    {{ $d->nama_departement }}
                 </option>
                 @endforeach
             </select>
         </div>
+
 
         <!-- Jabatan -->
         <div class="mb-3">
@@ -86,17 +87,18 @@
         </div>
 
         <!-- Status -->
-        <div class="mb-3">
-            <label for="status" class="form-label">Status</label>
-            <select name="status" class="form-select" required>
+        <div class="mb-4">
+            <label for="status" class="form-label fw-semibold">Status</label>
+            <select name="status" class="form-select border-primary-subtle" required>
                 <option value="">-- Pilih Status --</option>
-                <option value="Aktif" {{ old('status', $employee->status) == 'Aktif' ? 'selected' : '' }}>Aktif</option>
-                <option value="Tidak Aktif" {{ old('status', $employee->status) == 'Tidak Aktif' ? 'selected' : '' }}>Tidak Aktif</option>
+                <option value="aktif" {{ old('status') == 'aktif' ? 'selected' : '' }}>Aktif</option>
+                <option value="nonaktif" {{ old('status') == 'nonaktif' ? 'selected' : '' }}>Tidak Aktif</option>
             </select>
         </div>
 
+
         <div class="d-flex justify-content-between">
-            <a href="{{ route('employee.index') }}" class="btn btn-secondary">Kembali</a>
+            <a href="{{ route('employees.index') }}" class="btn btn-secondary">Kembali</a>
             <button type="submit" class="btn btn-primary">Perbarui</button>
         </div>
     </form>

@@ -15,7 +15,7 @@
     </div>
 
     <!-- Cek Data -->
-    @if($departments->count())
+    @if($departements->count())
     <div class="overflow-x-auto bg-white shadow-lg rounded-2xl border border-gray-100">
         <table class="min-w-full divide-y divide-gray-200 text-sm text-gray-700">
             <thead class="bg-gradient-to-r from-blue-600 to-indigo-500 text-white">
@@ -26,11 +26,11 @@
             </thead>
 
             <tbody class="divide-y divide-gray-100">
-                @foreach($departments as $department)
+                @foreach($departements as $departement)
                 <tr class="hover:bg-blue-50 transition-colors duration-150">
-                    <td class="px-6 py-3 font-medium text-gray-800">{{ $department->nama_departement }}</td>
+                    <td class="px-6 py-3 font-medium text-gray-800">{{ $departement->nama_departement }}</td>
                     <td class="px-6 py-3 text-center space-x-3">
-                        <form action="{{ route('departements.destroy', $department->id) }}" method="POST"
+                        <form action="{{ route('departements.destroy', $departement->id) }}" method="POST"
                             onsubmit="return confirm('Yakin ingin menghapus departemen ini?')">
                             @csrf
                             @method('DELETE')
@@ -38,7 +38,6 @@
                                 Hapus
                             </button>
                         </form>
-
                     </td>
                 </tr>
                 @endforeach
@@ -48,7 +47,7 @@
 
     <!-- Pagination -->
     <div class="mt-6 flex justify-center">
-        {{ $departments->links('pagination::tailwind') }}
+        {{ $departements->links('pagination::tailwind') }}
     </div>
     @else
     <div class="p-6 bg-yellow-50 border-l-4 border-yellow-400 text-yellow-700 rounded-xl shadow-sm">

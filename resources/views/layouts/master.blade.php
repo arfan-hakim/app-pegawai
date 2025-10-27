@@ -8,7 +8,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-100 text-gray-800">
+<!-- Gunakan flex dan min-h-screen agar footer selalu di bawah -->
+
+<body class="flex flex-col min-h-screen bg-gray-100 text-gray-800">
 
     <!-- Navbar -->
     <header class="bg-blue-600 text-white shadow">
@@ -26,13 +28,13 @@
         </div>
     </header>
 
-    <!-- Konten -->
-    <main class="container mx-auto px-6 py-8">
+    <!-- Konten utama -->
+    <main class="flex-grow container mx-auto px-6 py-8">
         @yield('content')
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-gray-300 text-center py-4 mt-8">
+    <footer class="bg-gray-900 text-gray-300 text-center py-4 mt-auto">
         <p>&copy; {{ date('Y') }} App Pegawai</p>
     </footer>
 

@@ -22,6 +22,14 @@
             </div>
             @endif
 
+            @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
+
+
             <form action="{{ route('employees.store') }}" method="POST">
                 @csrf
 
@@ -98,8 +106,8 @@
                     <label for="status" class="form-label fw-semibold">Status</label>
                     <select name="status" class="form-select border-primary-subtle" required>
                         <option value="">-- Pilih Status --</option>
-                        <option value="Aktif" {{ old('status') == 'Aktif' ? 'selected' : '' }}>Aktif</option>
-                        <option value="Tidak Aktif" {{ old('status') == 'Tidak Aktif' ? 'selected' : '' }}>Tidak Aktif</option>
+                        <option value="aktif" {{ old('status') == 'aktif' ? 'selected' : '' }}>Aktif</option>
+                        <option value="nonaktif" {{ old('status') == 'nonaktif' ? 'selected' : '' }}>Tidak Aktif</option>
                     </select>
                 </div>
 

@@ -3,65 +3,73 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
+use App\Models\Employee;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $attendances = Attendance::with('employee')->latest()->paginate(5);
-        return view('attendance.index', compact('attendances'));
+        $employees = Employee::all();
+        $attendances = Attendance::whereDate('tanggal', Carbon::today())->get();
+        return view('attendances.index', compact('employees', 'attendances'));
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function updateStatus(Request $request, $id)
     {
-        //
+        $request->validate([
+            'status_absensi' => 'required|in:hadir,izin,sakit,alpha',
+        ]);
+
+        Attendance::updateOrCreate(
+            ['karyawan_id' => $id, 'tanggal' => Carbon::today()],
+            ['status_absensi' => $request->status_absensi]
+        );
+
+        return back()->with('success', 'Status absensi diperbarui!');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function checkIn($id)
     {
-        //
+        $attendance = Attendance::where('karyawan_id', $id)
+            ->whereDate('tanggal', Carbon::today())
+            ->first();
+
+        if (!$attendance || !$attendance->status_absensi) {
+            return back()->with('error', 'Pilih status absensi terlebih dahulu!');
+        }
+
+        $attendance->update(['tanggal' => Carbon::today(), 'waktu_masuk' => Carbon::now()->format('H:i:s')]);
+
+        return back()->with('success', 'Waktu masuk tercatat!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function checkOut($id)
     {
-        //
+        $attendance = Attendance::where('karyawan_id', $id)
+            ->whereDate('tanggal', Carbon::today())
+            ->first();
+
+        if (!$attendance || !$attendance->waktu_masuk) {
+            return back()->with('error', 'Belum melakukan absensi masuk!');
+        }
+
+        $attendance->update([
+            'waktu_keluar' => Carbon::now()->format('H:i:s'),
+        ]);
+
+        return back()->with('success', 'Waktu keluar tercatat!');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function reset()
     {
-        //
-    }
+        \App\Models\Attendance::query()->update([
+            'tanggal' => null,
+            'waktu_masuk' => null,
+            'waktu_keluar' => null,
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->route('attendances.index')->with('success', 'Data absensi berhasil direset.');
     }
 }

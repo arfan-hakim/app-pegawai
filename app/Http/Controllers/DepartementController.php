@@ -7,13 +7,15 @@ use Illuminate\Http\Request;
 
 class DepartementController extends Controller
 {
-    /**
-     * Tampilkan semua data department.
-     */
     public function index()
     {
-        $departments = Departement::latest()->paginate(5);
-        return view('departement.index', compact('departments'));
+        $departements = Departement::latest()->paginate(5);
+        return view('departements.index', compact('departements'));
+    }
+
+    public function create()
+    {
+        return view('departements.create'); // ✅ pakai 'departements'
     }
 
     public function store(Request $request)
@@ -28,62 +30,28 @@ class DepartementController extends Controller
             ->with('success', 'Departemen berhasil ditambahkan.');
     }
 
-    /**
-     * Tampilkan form tambah department.
-     */
-    public function create()
+    public function edit(Departement $departement)
     {
-        return view('departement.create');
+        return view('departements.edit', compact('departement')); // ✅ pakai 'departements'
     }
 
-    /**
-     * Simpan data department baru ke database.
-     */
-    // public function store(Request $request)
-    // {
-    //     $request->validate([
-    //         'name' => 'required|string|max:255|unique:departments,name',
-    //         'description' => 'nullable|string',
-    //     ]);
-
-    //     Departement::create($request->all());
-
-    //     return redirect()->route('departement.index')
-    //         ->with('success', 'Departement berhasil ditambahkan.');
-    // }
-
-    /**
-     * Tampilkan form edit untuk department tertentu.
-     */
-    public function edit(Departement $department)
-    {
-        return view('departement.edit', compact('department'));
-    }
-
-    /**
-     * Update data department di database.
-     */
-    public function update(Request $request, Departement $department)
+    public function update(Request $request, Departement $departement)
     {
         $request->validate([
-            'name' => 'required|string|max:255|unique:departments,name,' . $department->id,
-            'description' => 'nullable|string',
+            'nama_departement' => 'required|string|max:100',
         ]);
 
-        $department->update($request->all());
+        $departement->update($request->all());
 
-        return redirect()->route('departement.index')
-            ->with('success', 'Department berhasil diperbarui.');
+        return redirect()->route('departements.index')
+            ->with('success', 'Departemen berhasil diperbarui.');
     }
 
-    /**
-     * Hapus data department.
-     */
     public function destroy(Departement $departement)
     {
         $departement->delete();
 
         return redirect()->route('departements.index')
-            ->with('success', 'Departement berhasil dihapus.');
+            ->with('success', 'Departemen berhasil dihapus.');
     }
 }
