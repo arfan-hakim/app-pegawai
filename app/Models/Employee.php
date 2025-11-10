@@ -30,4 +30,8 @@ class Employee extends Model
     {
         return $this->belongsTo(Position::class, 'jabatan_id');
     }
+    public function koperasi()
+    {
+        return $this->hasOne(Koperasi::class);
+    }
 }

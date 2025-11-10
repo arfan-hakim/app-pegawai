@@ -6,6 +6,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\DepartementController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\SalaryController;
+use App\Http\Controllers\KoperasiController;
 
 Route::resource('employees', EmployeeController::class);
 Route::resource('departements', DepartementController::class);
@@ -18,4 +19,8 @@ Route::post('/attendances/{id}/checkout', [AttendanceController::class, 'checkOu
 Route::post('/attendances/reset', [AttendanceController::class, 'reset'])->name('attendances.reset');
 Route::resource('salaries', SalaryController::class);
 Route::post('/salaries/reset', [SalaryController::class, 'reset'])->name('salaries.reset');
+Route::get('/koperasis', [KoperasiController::class, 'index'])->name('koperasis.index');
+Route::get('/koperasis/{id}/use', [KoperasiController::class, 'useForm'])->name('koperasis.useForm');
+Route::post('/koperasis/{id}/use', [KoperasiController::class, 'useBalance'])->name('koperasis.useBalance');
+
 ?>

@@ -23,6 +23,7 @@
                     <li><a href="{{ url('/attendances') }}" class="hover:underline">Attendance</a></li>
                     <li><a href="{{ url('/positions') }}" class="hover:underline">Position</a></li>
                     <li><a href="{{ url('/salaries') }}" class="hover:underline">Salary</a></li>
+                    <li><a href="{{ url('/koperasis') }}" class="hover:underline">Saldo Koperasi</a></li>
                 </ul>
             </nav>
         </div>
