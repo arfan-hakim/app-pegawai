@@ -4,39 +4,61 @@
 @section('page-title', 'Gunakan Saldo Koperasi')
 
 @section('content')
-<div class="max-w-lg mx-auto bg-white p-6 rounded-2xl shadow-md border border-gray-100">
-    <h1 class="text-2xl font-bold mb-6 text-gray-700 text-center">Gunakan Saldo Koperasi</h1>
+<div class="max-w-lg mx-auto mt-10 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md p-8 rounded-2xl shadow-xl border border-green-200 dark:border-green-700 transition-all">
+
+    <h1 class="text-3xl font-semibold mb-6 text-center text-green-800 dark:text-green-200">
+        💳 Gunakan Saldo Koperasi
+    </h1>
 
     @if(session('error'))
-    <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-3 rounded mb-4">
-        {{ session('error') }}
+    <div class="bg-red-100 dark:bg-red-900/40 border-l-4 border-red-600 text-red-700 dark:text-red-200 p-4 rounded-lg mb-6 shadow-sm">
+        ⚠️ {{ session('error') }}
     </div>
     @endif
 
-    <table class="w-full mb-6 border border-gray-200 rounded-lg overflow-hidden">
-        <tr class="border-b">
-            <th class="px-4 py-2 text-left bg-gray-100">Nama Pegawai</th>
-            <td class="px-4 py-2">{{ $koperasi->employee->nama_lengkap }}</td>
-        </tr>
-        <tr>
-            <th class="px-4 py-2 text-left bg-gray-100">Saldo Saat Ini</th>
-            <td class="px-4 py-2 font-semibold text-green-600">Rp {{ number_format($koperasi->saldo, 0, ',', '.') }}</td>
-        </tr>
-    </table>
+    <!-- Info Pegawai -->
+    <div class="overflow-hidden rounded-xl border border-green-100 dark:border-green-700 mb-6">
+        <table class="w-full text-left text-gray-700 dark:text-gray-200">
+            <tr class="border-b border-green-100 dark:border-green-700">
+                <th class="px-4 py-2 bg-green-50 dark:bg-green-900/30 font-semibold">Nama Pegawai</th>
+                <td class="px-4 py-2">{{ $koperasi->employee->nama_lengkap }}</td>
+            </tr>
+            <tr>
+                <th class="px-4 py-2 bg-green-50 dark:bg-green-900/30 font-semibold">Saldo Saat Ini</th>
+                <td class="px-4 py-2 font-semibold text-green-700 dark:text-green-300">
+                    Rp {{ number_format($koperasi->saldo, 0, ',', '.') }}
+                </td>
+            </tr>
+        </table>
+    </div>
 
-    <form action="{{ route('koperasis.useBalance', $koperasi->id) }}" method="POST">
+    <!-- Form Gunakan Saldo -->
+    <form action="{{ route('koperasis.useBalance', $koperasi->id) }}" method="POST" class="space-y-5">
         @csrf
-        <div class="mb-4">
-            <label class="block text-gray-700 font-medium mb-2">Jumlah yang Ingin Dipakai</label>
-            <input type="number" name="jumlah" class="w-full border-gray-300 rounded-lg p-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Masukkan jumlah (Rp)">
+        <div>
+            <label class="block text-green-800 dark:text-green-200 font-medium mb-2">
+                Jumlah yang Ingin Dipakai
+            </label>
+            <input
+                type="number"
+                name="jumlah"
+                class="w-full border border-green-200 dark:border-green-700 rounded-lg p-3 focus:ring-2 focus:ring-green-500 focus:outline-none dark:bg-gray-900 dark:text-white transition"
+                placeholder="Masukkan jumlah (Rp)">
             @error('jumlah')
-            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+            <p class="text-red-600 dark:text-red-400 text-sm mt-1">{{ $message }}</p>
             @enderror
         </div>
 
-        <div class="flex justify-between mt-6">
-            <a href="{{ route('koperasis.index') }}" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition">Kembali</a>
-            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Gunakan Saldo</button>
+        <!-- Tombol Aksi -->
+        <div class="flex justify-between items-center pt-4">
+            <a href="{{ route('koperasis.index') }}"
+                class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition shadow-sm">
+                ← Kembali
+            </a>
+            <button type="submit"
+                class="bg-green-700 hover:bg-green-800 text-white px-5 py-2 rounded-lg shadow-md font-medium transition">
+                💸 Gunakan Saldo
+            </button>
         </div>
     </form>
 </div>

@@ -4,26 +4,28 @@
 @section('page-title', 'Tambah Departemen')
 
 @section('content')
-<div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
-    <h1 class="text-2xl font-bold mb-6 text-gray-700">Tambah Departemen</h1>
+<div class="max-w-2xl mx-auto mt-10 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-green-200 dark:border-green-700 transition">
 
-    <form action="{{ route('departements.store') }}" method="POST" class="space-y-4">
+    <!-- Form Tambah Departemen -->
+    <form action="{{ route('departements.store') }}" method="POST" class="space-y-6">
         @csrf
 
         <div>
-            <label class="block text-gray-700">Nama Departemen</label>
+            <label class="block text-green-900 dark:text-green-200 font-medium mb-2">Nama Departemen</label>
             <input type="text" name="nama_departement"
-                class="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-200" required>
+                class="w-full border border-green-300 dark:border-green-600 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 rounded-lg shadow-sm px-4 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
+                placeholder="Masukkan nama departemen..." required>
         </div>
 
-        <div class="flex justify-between">
+        <div class="flex justify-between items-center pt-4">
             <a href="{{ route('departements.index') }}"
-                class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600">
-                Kembali
+                class="bg-gray-500 hover:bg-gray-600 text-white px-5 py-2 rounded-lg shadow transition">
+                ← Kembali
             </a>
+
             <button type="submit"
-                class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
-                Simpan
+                class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg shadow-md transition">
+                💾 Simpan
             </button>
         </div>
     </form>

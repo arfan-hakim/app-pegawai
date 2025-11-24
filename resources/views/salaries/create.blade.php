@@ -4,15 +4,19 @@
 @section('page-title', 'Tambah Data Gaji')
 
 @section('content')
-<div class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
-    <h1 class="text-xl font-bold text-gray-700 mb-6">Form Tambah Data Gaji</h1>
+<div class="max-w-3xl mx-auto bg-white/90 dark:bg-gray-800/90 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-green-200 dark:border-green-700 mt-10">
+    <h1 class="text-3xl font-bold text-green-800 dark:text-green-200 mb-8 flex items-center gap-2">
+        🧾 Form Tambah Data Gaji
+    </h1>
 
-    <form action="{{ route('salaries.store') }}" method="POST" id="salaryForm">
+    <form action="{{ route('salaries.store') }}" method="POST" id="salaryForm" class="space-y-5">
         @csrf
 
-        <div class="mb-4">
-            <label class="block text-gray-700">Nama Karyawan</label>
-            <select name="karyawan_id" id="karyawan" class="w-full border-gray-300 rounded-lg mt-1">
+        <!-- Nama Karyawan -->
+        <div>
+            <label for="karyawan" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Nama Karyawan</label>
+            <select name="karyawan_id" id="karyawan"
+                class="w-full border border-green-300 dark:border-green-700 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500 focus:border-green-500 transition bg-white dark:bg-gray-900/70 text-gray-800 dark:text-gray-100">
                 <option value="">-- Pilih Karyawan --</option>
                 @foreach($employees as $employee)
                 <option value="{{ $employee->id }}" data-gaji="{{ $employee->position->gaji_pokok ?? 0 }}">
@@ -22,29 +26,44 @@
             </select>
         </div>
 
-        <div class="mb-4">
-            <label class="block text-gray-700">Bulan</label>
-            <input type="month" name="bulan" class="w-full border-gray-300 rounded-lg mt-1">
+        <!-- Bulan -->
+        <div>
+            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Bulan</label>
+            <input type="month" name="bulan"
+                class="w-full border border-green-300 dark:border-green-700 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500 focus:border-green-500 transition bg-white dark:bg-gray-900/70 text-gray-800 dark:text-gray-100">
         </div>
 
-        <div class="mb-4">
-            <label class="block text-gray-700">Gaji Pokok</label>
-            <input type="number" name="gaji_pokok" id="gaji_pokok" class="w-full border-gray-300 rounded-lg mt-1" readonly>
+        <!-- Gaji Pokok -->
+        <div>
+            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Gaji Pokok</label>
+            <input type="number" name="gaji_pokok" id="gaji_pokok" readonly
+                class="w-full border border-green-300 dark:border-green-700 rounded-lg shadow-sm bg-gray-100 dark:bg-gray-700 cursor-not-allowed text-gray-700 dark:text-gray-300">
         </div>
 
-        <div class="mb-4">
-            <label class="block text-gray-700">Tunjangan</label>
-            <input type="number" name="tunjangan" class="w-full border-gray-300 rounded-lg mt-1">
+        <!-- Tunjangan -->
+        <div>
+            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Tunjangan</label>
+            <input type="number" name="tunjangan"
+                class="w-full border border-green-300 dark:border-green-700 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500 focus:border-green-500 transition bg-white dark:bg-gray-900/70 text-gray-800 dark:text-gray-100">
         </div>
 
-        <div class="mb-4">
-            <label class="block text-gray-700">Potongan</label>
-            <input type="number" name="potongan" class="w-full border-gray-300 rounded-lg mt-1">
+        <!-- Potongan -->
+        <div>
+            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Potongan</label>
+            <input type="number" name="potongan"
+                class="w-full border border-green-300 dark:border-green-700 rounded-lg shadow-sm focus:ring-2 focus:ring-green-500 focus:border-green-500 transition bg-white dark:bg-gray-900/70 text-gray-800 dark:text-gray-100">
         </div>
 
-        <div class="flex justify-end space-x-2">
-            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">Simpan</button>
-            <a href="{{ route('salaries.index') }}" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg">Kembali</a>
+        <!-- Tombol Aksi -->
+        <div class="flex justify-end gap-3 pt-4">
+            <a href="{{ route('salaries.index') }}"
+                class="px-5 py-2 rounded-lg bg-gray-500 hover:bg-gray-600 text-white shadow transition duration-200 flex items-center gap-1">
+                ⬅️ Kembali
+            </a>
+            <button type="submit"
+                class="px-5 py-2 rounded-lg bg-green-700 hover:bg-green-800 text-white shadow-md transition duration-200 flex items-center gap-1">
+                💾 Simpan
+            </button>
         </div>
     </form>
 </div>

@@ -10,9 +10,10 @@ class KoperasiController extends Controller
     // 🧾 Menampilkan semua data saldo koperasi
     public function index()
     {
-        $koperasis = Koperasi::with('employee')->get();
-        return view('koperasis.index', compact('koperasis'));
+        $koperasi = Koperasi::paginate(10); // gunakan paginate
+        return view('koperasis.index', compact('koperasi'));
     }
+
 
     // 🪙 Menampilkan form untuk menggunakan saldo
     public function useForm($id)

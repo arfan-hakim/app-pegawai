@@ -108,4 +108,14 @@ class EmployeeController extends Controller
         // Redirect kembali ke halaman index dengan pesan sukses
         return redirect()->route('employees.index')->with('success', 'Data karyawan berhasil diperbarui!');
     }
+
+    public function destroy($id)
+    {
+        $employee = Employee::findOrFail($id);
+        $employee->delete();
+
+        return redirect()
+            ->route('employees.index')
+            ->with('success', 'Data pegawai berhasil dihapus.');
+    }
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\DepartementController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\KoperasiController;
+use App\Http\Controllers\AdminAuthController;
 
 Route::resource('employees', EmployeeController::class);
 Route::resource('departements', DepartementController::class);
@@ -22,5 +23,10 @@ Route::post('/salaries/reset', [SalaryController::class, 'reset'])->name('salari
 Route::get('/koperasis', [KoperasiController::class, 'index'])->name('koperasis.index');
 Route::get('/koperasis/{id}/use', [KoperasiController::class, 'useForm'])->name('koperasis.useForm');
 Route::post('/koperasis/{id}/use', [KoperasiController::class, 'useBalance'])->name('koperasis.useBalance');
+Route::get('/', [AdminAuthController::class, 'landing'])->name('landing');
+Route::get('/login', [AdminAuthController::class, 'loginForm'])->name('login.form');
+Route::post('/login', [AdminAuthController::class, 'loginProcess'])->name('login.process');
+Route::get('/welcome-admin', [AdminAuthController::class, 'welcome'])->name('admin.welcome');
+Route::get('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 
 ?>
